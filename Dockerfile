@@ -8,8 +8,8 @@ ARG VCS_BRANCH
 
 # See http://label-schema.org/rc1/ and https://microbadger.com/labels
 LABEL maintainer="Jan Wagner <waja@cyconet.org>" \
-    org.label-schema.name="PHP 8.2 ALPHA - FastCGI Process Manager" \
-    org.label-schema.description="PHP-FPM 8.2 ALPHA (with some more extensions installed)" \
+    org.label-schema.name="PHP 8.2 - FastCGI Process Manager" \
+    org.label-schema.description="PHP-FPM 8.2 (with some more extensions installed)" \
     org.label-schema.vendor="Cyconet" \
     org.label-schema.schema-version="1.0" \
     org.label-schema.build-date="${BUILD_DATE:-unknown}" \
