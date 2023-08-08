@@ -14,7 +14,7 @@ on:
     - cron: '43 10 * * 4'
 
 env:
-  IMAGE_NAME: php82-fpm
+  IMAGE_NAME: php83-fpm
 
 jobs:
   codespell:
@@ -143,8 +143,8 @@ jobs:
       - name: Test the Docker image
         run: |
           CONTAINER_OUTPUT="$(docker run --rm -t localhost:5000/foobar/${{ env.IMAGE_NAME }} -v)"
-          TEST_STRING="$(echo "${CONTAINER_OUTPUT}" | grep -E '^PHP\s8\.2' | cut -d'.' -f3 --complement)"
-          if ! [ "${TEST_STRING}" = "PHP 8.2" ]; then exit 1; fi
+          TEST_STRING="$(echo "${CONTAINER_OUTPUT}" | grep -E '^PHP\s8\.3' | cut -d'.' -f3 --complement)"
+          if ! [ "${TEST_STRING}" = "PHP 8.3" ]; then exit 1; fi
       - name: Test composer
         run: docker run -i localhost:5000/foobar/${{ env.IMAGE_NAME }} which composer && ( composer --version || exit 1 ) || exit 0
       - name: Testing characters
