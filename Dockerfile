@@ -46,7 +46,7 @@ RUN set -xe; \
     --with-freetype \
     --with-jpeg \
   && NPROC="$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1)" \
-  && curl -Lf -o /tmp/master.tar.gz https://github.com/Imagick/imagick/archive/${IMAGICK_SHA}.tar.gz \
+  && curl -Lf -o /tmp/master.tar.gz https://github.com/Imagick/imagick/archive/refs/heads/master.tar.gz \
   && mkdir -p /tmp/imagick && tar --strip-components=1 -xf /tmp/master.tar.gz -C /tmp/imagick \
   && cd /tmp/imagick && phpize \
   && ./configure \
