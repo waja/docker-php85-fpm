@@ -1,6 +1,6 @@
 # checkov:skip=CKV_DOCKER_2: no healthcheck (yet)
 # checkov:skip=CKV_DOCKER_3: no user (yet)
-FROM php:8.3.9-fpm-alpine
+FROM php:8.4.0alpha1-fpm-alpine
 
 ARG BUILD_DATE
 ARG BUILD_VERSION
@@ -10,8 +10,8 @@ ARG VCS_BRANCH
 
 # See http://label-schema.org/rc1/ and https://microbadger.com/labels
 LABEL maintainer="Jan Wagner <waja@cyconet.org>" \
-    org.label-schema.name="PHP 8.3 - FastCGI Process Manager" \
-    org.label-schema.description="PHP-FPM 8.3 (with some more extensions installed)" \
+    org.label-schema.name="PHP 8.4 - FastCGI Process Manager" \
+    org.label-schema.description="PHP-FPM 8.4 (with some more extensions installed)" \
     org.label-schema.vendor="Cyconet" \
     org.label-schema.schema-version="1.0" \
     org.label-schema.build-date="${BUILD_DATE:-unknown}" \
@@ -19,7 +19,7 @@ LABEL maintainer="Jan Wagner <waja@cyconet.org>" \
     org.label-schema.vcs-url="${VCS_URL:-unknown}" \
     org.label-schema.vcs-ref="${VCS_REF:-unknown}" \
     org.label-schema.vcs-branch="${VCS_BRANCH:-unknown}" \
-    org.opencontainers.image.source="https://github.com/waja/docker-php81-fpm"
+    org.opencontainers.image.source="https://github.com/waja/docker-php84-fpm"
 
 ENV EXT_DEPS \
   freetype \
