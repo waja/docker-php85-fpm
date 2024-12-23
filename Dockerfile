@@ -34,7 +34,7 @@ ENV EXT_DEPS \
   imagemagick-dev \
   libtool
 
-ENV IMAGICK_SHA 28f27044e435a2b203e32675e942eb8de620ee58
+ENV IMAGICK_SHA 65e27f2bc02e7e8f1bf64e26e359e42a1331fca1
 
 WORKDIR /tmp/
 # hadolint ignore=SC2086,DL3017,DL3018,DL3003
@@ -48,12 +48,8 @@ RUN set -xe; \
     --with-freetype \
     --with-jpeg \
   && NPROC="$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1)" \
-  && curl -Lf -o /tmp/master.tar.gz https://github.com/Imagick/imagick/archive/refs/heads/master.tar.gz \
-  && mkdir -p /tmp/imagick && tar --strip-components=1 -xf /tmp/master.tar.gz -C /tmp/imagick \
-  && cd /tmp/imagick && phpize \
-  && ./configure \
-  && make "-j${NPROC}" \
-  && make install \
+  && curl -L -o /tmp/imagick.tar.gz https://github.com/Imagick/imagick/archive/${IMAGICK_SHA}.tar.gz && tar --strip-components=1 -xf /tmp/imagick.tar.gz && phpize && ./configure && make "-j${NPROC}" && make install \
+  && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
   && docker-php-ext-install "-j${NPROC}" bcmath exif gd mysqli \
   && docker-php-ext-install "-j${NPROC}" zip \
   && docker-php-ext-enable bcmath exif gd imagick mysqli \
