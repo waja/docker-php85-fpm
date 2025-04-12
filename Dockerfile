@@ -53,7 +53,6 @@ RUN set -xe; \
     --with-jpeg \
   && NPROC="$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1)" \
   && mkdir -p /tmp/imagick && curl -L -o /tmp/imagick.tar.gz https://github.com/Imagick/imagick/archive/${IMAGICK_URL}.tar.gz && tar --strip-components=1 -xf /tmp/imagick.tar.gz -C /tmp/imagick && cd /tmp/imagick && phpize && ./configure && make "-j${NPROC}" && make install \
-  && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
   && docker-php-ext-install "-j${NPROC}" bcmath exif gd mysqli \
   && docker-php-ext-install "-j${NPROC}" zip \
   && docker-php-ext-enable bcmath exif gd imagick mysqli \
