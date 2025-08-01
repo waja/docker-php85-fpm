@@ -2,7 +2,7 @@
 # requires DOCKER_BUILDKIT=1 set when running docker build
 # checkov:skip=CKV_DOCKER_2: no healthcheck (yet)
 # checkov:skip=CKV_DOCKER_3: no user (yet)
-FROM php:8.4.10-fpm-alpine@sha256:983b2d9668d50e0b9d346d03290e7296537d10941c4a954af8d62ea5fc9ca463
+FROM php:8.5.0alpha2-fpm-alpine@sha256:983b2d9668d50e0b9d346d03290e7296537d10941c4a954af8d62ea5fc9ca463
 
 ARG BUILD_DATE
 ARG BUILD_VERSION
@@ -12,8 +12,8 @@ ARG VCS_BRANCH
 
 # See http://label-schema.org/rc1/ and https://microbadger.com/labels
 LABEL maintainer="Jan Wagner <waja@cyconet.org>" \
-    org.label-schema.name="PHP 8.4 - FastCGI Process Manager" \
-    org.label-schema.description="PHP-FPM 8.4 (with some more extensions installed)" \
+    org.label-schema.name="PHP 8.5 - FastCGI Process Manager" \
+    org.label-schema.description="PHP-FPM 8.5 (with some more extensions installed)" \
     org.label-schema.vendor="Cyconet" \
     org.label-schema.schema-version="1.0" \
     org.label-schema.build-date="${BUILD_DATE:-unknown}" \
