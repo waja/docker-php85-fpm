@@ -130,9 +130,17 @@ jobs:
           docker buildx imagetools inspect localhost:5000/foobar/${{ env.IMAGE_NAME }}
       - name: Test the Docker image
         run: |
-          CONTAINER_OUTPUT="$(docker run --rm -t localhost:5000/foobar/${{ env.IMAGE_NAME }} -v)"
-          TEST_STRING="$(echo "${CONTAINER_OUTPUT}" | grep -E '^PHP\s8\.5' | cut -d'.' -f3 --complement)"
-          if ! [ "${TEST_STRING}" = "PHP 8.5" ]; then exit 1; fi
+          CONTAINER_OUTPUT=$(docker run --rm localhost:5000/foobar/${{ env.IMAGE_NAME }} -v 2>&1 | grep -E '^PHP\s8\.5')
+          echo "Container output: $CONTAINER_OUTPUT"
+          echo "Container output (quoted): '$CONTAINER_OUTPUT'"
+
+          TEST_STRING=$(echo "${CONTAINER_OUTPUT}" | head -1 | cut -d'.' -f3 --complement)
+          echo "Extracted test string: '$TEST_STRING'"
+
+          if ! [ "${TEST_STRING}" = "PHP 8.5" ]; then
+            echo "ERROR: Expected 'PHP 8.5' but got '$TEST_STRING'"
+            exit 1
+          fi
       - name: Test composer
         run: docker run -i localhost:5000/foobar/${{ env.IMAGE_NAME }} which composer && ( composer --version || exit 1 ) || exit 0
       - name: Testing characters
